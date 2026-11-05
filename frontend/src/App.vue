@@ -2,20 +2,15 @@
 <div id="app" class="container">
   <div class="row"  style="margin-top: 15px">
     <router-link class="three columns button button-primary"
-      to="/">Home</router-link>
+      to="/">Inicio</router-link>
     <router-link class="three columns button button-primary"
-      to="/book">Books</router-link>
+      to="/book">Libros</router-link>
     <router-link class="three columns button button-primary"
-      to="/author">Authors</router-link>
+      to="/author">Autores</router-link>
     <router-link class="three columns button button-primary"
-      to="/publisher">Publishers</router-link>
+      to="/publisher">Editoriales</router-link>
   </div>
  <router-view :key="$route.fullPath" />
-  <div class="row">
-    <button disabled="disabled" class="twelve columns button-primary">
-      Copyright (c) 2020 - Armando Arce-Orozco
-    </button>
-  </div>
 </div>
 </template>
 

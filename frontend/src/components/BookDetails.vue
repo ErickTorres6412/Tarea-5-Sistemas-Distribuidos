@@ -6,24 +6,24 @@
      <fieldset :disabled="show">
      <div class="row">
       <div class="six columns">
-       <label for="titleInput">Title</label>
+       <label for="titleInput">Título</label>
        <input id="titleInput" class="u-full-width" type="text"
          v-model="book.title">
       </div>
       <div class="six columns">
-       <label for="authorInput">Author</label>
+       <label for="authorInput">Autor</label>
        <input id="authorInput" class="u-full-width" type="text"
           v-model="book.author">
       </div>
      </div>
      <div class="row">
       <div class="six columns">
-       <label for="publisherInput">Publisher</label>
+       <label for="publisherInput">Editorial</label>
        <input id="publisherInput" class="u-full-width" type="text"
           v-model="book.publisher">
       </div>
       <div class="six columns">
-       <label for="editionInput">Edition</label>
+       <label for="editionInput">Edición</label>
        <input id="editionInput" class="u-full-width" type="text"
          v-model="book.edition">
       </div>
@@ -35,12 +35,12 @@
           v-model.number="book.copyright">
       </div>
       <div class="four columns">
-       <label for="languageInput">Language</label>
+       <label for="languageInput">Idioma</label>
        <input id="languageInput" class="u-full-width" type="text"
          v-model="book.language">
       </div>
       <div class="four columns">
-       <label for="pagesInput">Pages</label>
+       <label for="pagesInput">Páginas</label>
        <input id="pagesInput" class="u-full-width" type="number"
          v-model.number="book.pages">
       </div>
@@ -48,11 +48,11 @@
      </fieldset>
      <div class="row">
       <router-link class="button button-primary"
-        to="/book">Back</router-link>
+        to="/book">Volver</router-link>
        <a v-if='edit' class="button button-primary" style="float: right"
-         v-on:click="updateBook(book.id)">Update</a>
+         v-on:click="updateBook(book.id)">Actualizar</a>
        <a v-if='create' class="button button-primary" style="float: right"
-         v-on:click="createBook()">Create</a>
+         v-on:click="createBook()">Crear</a>
      </div>
     </form>
   </div>
@@ -67,7 +67,7 @@ export default {
   props: ['show','edit','create'],
   data() {
     return {
-      title: "Book Data",
+      title: "Datos del libro",
       book: {}
     }
   },

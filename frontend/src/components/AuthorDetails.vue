@@ -6,31 +6,31 @@
      <fieldset :disabled="show">
      <div class="row">
       <div class="six columns">
-       <label for="authorInput">Author</label>
+       <label for="authorInput">Autor</label>
        <input id="authorInput" class="u-full-width" type="text"
          v-model="author.author">
       </div>
       <div class="six columns">
-       <label for="nationalityInput">Nationality</label>
+       <label for="nationalityInput">Nacionalidad</label>
        <input id="nationalityInput" class="u-full-width" type="text"
           v-model="author.nationality">
       </div>
      </div>
      <div class="row">
       <div class="six columns">
-       <label for="birthYearInput">Birth year</label>
+       <label for="birthYearInput">Año de nacimiento</label>
        <input id="birthYearInput" class="u-full-width" type="number"
           v-model.number="author.birth_year">
       </div>
       <div class="six columns">
-       <label for="fieldsInput">Fields</label>
+       <label for="fieldsInput">Áreas</label>
        <input id="fieldsInput" class="u-full-width" type="text"
          v-model="author.fields">
       </div>
      </div>
      </fieldset>
      <div class="row" v-if="author.books && author.books.length">
-      <label>Books</label>
+      <label>Libros</label>
       <ul>
         <li v-for="book in author.books" :key="book.book_id">
           <router-link :to="'/book/show/'+book.book_id">{{book.title}}</router-link>
@@ -39,11 +39,11 @@
      </div>
      <div class="row">
       <router-link class="button button-primary"
-        to="/author">Back</router-link>
+        to="/author">Volver</router-link>
        <a v-if='edit' class="button button-primary" style="float: right"
-         v-on:click="updateAuthor(author.id)">Update</a>
+         v-on:click="updateAuthor(author.id)">Actualizar</a>
        <a v-if='create' class="button button-primary" style="float: right"
-         v-on:click="createAuthor()">Create</a>
+         v-on:click="createAuthor()">Crear</a>
      </div>
     </form>
   </div>
@@ -58,7 +58,7 @@ export default {
   props: ['show','edit','create'],
   data() {
     return {
-      title: "Author Data",
+      title: "Datos del autor",
       author: {}
     }
   },

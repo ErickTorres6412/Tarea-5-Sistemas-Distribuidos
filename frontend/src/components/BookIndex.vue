@@ -5,11 +5,11 @@
      <div v-if="message" class="notice">{{message}}</div>
      <table class="u-full-width"><thead>
        <tr>
-        <th>Title</th>
+        <th>Título</th>
         <th>Autor</th>
-        <th>Publisher</th>
-        <th>Edition</th>
-        <th class="text-center">Actions</th>
+        <th>Editorial</th>
+        <th>Edición</th>
+        <th class="text-center">Acciones</th>
        </tr>
        </thead><tbody>
        <tr v-for='book in books' :key="book.id">
@@ -19,22 +19,22 @@
        <td>{{book.edition}}</td>
        <td>
        <router-link class="button"
-         :to="'/book/show/'+book.id">Show</router-link>
+         :to="'/book/show/'+book.id">Ver</router-link>
        &nbsp;
        <router-link class="button"
-         :to="'/book/edit/'+book.id">Edit</router-link>
+         :to="'/book/edit/'+book.id">Editar</router-link>
        &nbsp;
        <a class="button"
-         v-on:click="deleteBook(book.id)">Erase</a>
+         v-on:click="deleteBook(book.id)">Eliminar</a>
        </td>
        </tr></tbody>
      </table>
      <router-link class="button button-primary"
-       to="/book/create">New</router-link>
+       to="/book/create">Nuevo</router-link>
      &nbsp;
-     <a class="button" v-on:click="runTasks()">Process queue (bookTasks)</a>
+     <a class="button" v-on:click="runTasks()">Procesar lista (bookTasks)</a>
      &nbsp;
-     <a class="button" v-on:click="allBooks()">Refresh</a>
+     <a class="button" v-on:click="allBooks()">Refrescar</a>
    </div>
   </div>
 </template>
@@ -45,11 +45,12 @@ export default {
   name: "Book Index",
   data() {
     return {
-      title: 'Book List',
+      title: 'Lista de libros',
       books: [],
       message: this.$route.query.queued ?
-        'The ' + this.$route.query.queued + ' request was sent to the queue. ' +
-        'It will be applied when bookTasks is executed.' : ''
+        'La solicitud de ' +
+        ({insert: 'inserción', update: 'actualización'}[this.$route.query.queued] || this.$route.query.queued) +
+        ' se agregó a la lista bookstore. Se aplicará cuando se ejecute bookTasks.' : ''
     };
   },
   mounted() {
@@ -70,9 +71,9 @@ export default {
            method: 'DELETE'})
           .then((response) => {
             this.message = response.ok ?
-              'The delete request was sent to the queue. ' +
-              'It will be applied when bookTasks is executed.' :
-              'Error sending the delete request.';
+              'La solicitud de eliminación se agregó a la lista bookstore. ' +
+              'Se aplicará cuando se ejecute bookTasks.' :
+              'Error al enviar la solicitud de eliminación.';
             this.allBooks();
           }
         )
@@ -81,7 +82,7 @@ export default {
        fetch(this.url+'/.netlify/functions/bookTasks')
          .then((response) => response.json())
          .then((result) => {
-           this.message = 'bookTasks processed ' + result.processed + ' message(s).';
+           this.message = 'bookTasks procesó ' + result.processed + ' actualización(es).';
            this.allBooks();
          })
      }

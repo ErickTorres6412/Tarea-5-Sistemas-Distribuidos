@@ -6,31 +6,31 @@
      <fieldset :disabled="show">
      <div class="row">
       <div class="six columns">
-       <label for="publisherInput">Publisher</label>
+       <label for="publisherInput">Editorial</label>
        <input id="publisherInput" class="u-full-width" type="text"
          v-model="publisher.publisher">
       </div>
       <div class="six columns">
-       <label for="countryInput">Country</label>
+       <label for="countryInput">País</label>
        <input id="countryInput" class="u-full-width" type="text"
           v-model="publisher.country">
       </div>
      </div>
      <div class="row">
       <div class="six columns">
-       <label for="foundedInput">Founded</label>
+       <label for="foundedInput">Fundación</label>
        <input id="foundedInput" class="u-full-width" type="number"
           v-model.number="publisher.founded">
       </div>
       <div class="six columns">
-       <label for="genereInput">Genre</label>
+       <label for="genereInput">Género</label>
        <input id="genereInput" class="u-full-width" type="text"
          v-model="publisher.genere">
       </div>
      </div>
      </fieldset>
      <div class="row" v-if="publisher.books && publisher.books.length">
-      <label>Books</label>
+      <label>Libros</label>
       <ul>
         <li v-for="book in publisher.books" :key="book.book_id">
           <router-link :to="'/book/show/'+book.book_id">{{book.title}}</router-link>
@@ -39,11 +39,11 @@
      </div>
      <div class="row">
       <router-link class="button button-primary"
-        to="/publisher">Back</router-link>
+        to="/publisher">Volver</router-link>
        <a v-if='edit' class="button button-primary" style="float: right"
-         v-on:click="updatePublisher(publisher.id)">Update</a>
+         v-on:click="updatePublisher(publisher.id)">Actualizar</a>
        <a v-if='create' class="button button-primary" style="float: right"
-         v-on:click="createPublisher()">Create</a>
+         v-on:click="createPublisher()">Crear</a>
      </div>
     </form>
   </div>
@@ -58,7 +58,7 @@ export default {
   props: ['show','edit','create'],
   data() {
     return {
-      title: "Publisher Data",
+      title: "Datos de la editorial",
       publisher: {}
     }
   },

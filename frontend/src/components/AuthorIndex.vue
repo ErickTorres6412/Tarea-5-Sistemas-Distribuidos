@@ -5,11 +5,11 @@
      <div v-if="message" class="notice">{{message}}</div>
      <table class="u-full-width"><thead>
        <tr>
-        <th>Author</th>
-        <th>Nationality</th>
-        <th>Birth year</th>
-        <th>Fields</th>
-        <th class="text-center">Actions</th>
+        <th>Autor</th>
+        <th>Nacionalidad</th>
+        <th>Año de nacimiento</th>
+        <th>Áreas</th>
+        <th class="text-center">Acciones</th>
        </tr>
        </thead><tbody>
        <tr v-for='author in authors' :key="author.id">
@@ -19,22 +19,22 @@
        <td>{{author.fields}}</td>
        <td>
        <router-link class="button"
-         :to="'/author/show/'+author.id">Show</router-link>
+         :to="'/author/show/'+author.id">Ver</router-link>
        &nbsp;
        <router-link class="button"
-         :to="'/author/edit/'+author.id">Edit</router-link>
+         :to="'/author/edit/'+author.id">Editar</router-link>
        &nbsp;
        <a class="button"
-         v-on:click="deleteAuthor(author.id)">Erase</a>
+         v-on:click="deleteAuthor(author.id)">Eliminar</a>
        </td>
        </tr></tbody>
      </table>
      <router-link class="button button-primary"
-       to="/author/create">New</router-link>
+       to="/author/create">Nuevo</router-link>
      &nbsp;
-     <a class="button" v-on:click="runTasks()">Process queue (authorTasks)</a>
+     <a class="button" v-on:click="runTasks()">Procesar lista (authorTasks)</a>
      &nbsp;
-     <a class="button" v-on:click="allAuthors()">Refresh</a>
+     <a class="button" v-on:click="allAuthors()">Refrescar</a>
    </div>
   </div>
 </template>
@@ -45,11 +45,12 @@ export default {
   name: "Author Index",
   data() {
     return {
-      title: 'Author List',
+      title: 'Lista de autores',
       authors: [],
       message: this.$route.query.queued ?
-        'The ' + this.$route.query.queued + ' request was sent to the queue. ' +
-        'It will be applied when authorTasks is executed.' : ''
+        'La solicitud de ' +
+        ({insert: 'inserción', update: 'actualización'}[this.$route.query.queued] || this.$route.query.queued) +
+        ' se agregó a la lista bookstore. Se aplicará cuando se ejecute authorTasks.' : ''
     };
   },
   mounted() {
@@ -70,9 +71,9 @@ export default {
            method: 'DELETE'})
           .then((response) => {
             this.message = response.ok ?
-              'The delete request was sent to the queue. ' +
-              'It will be applied when authorTasks is executed.' :
-              'Error sending the delete request.';
+              'La solicitud de eliminación se agregó a la lista bookstore. ' +
+              'Se aplicará cuando se ejecute authorTasks.' :
+              'Error al enviar la solicitud de eliminación.';
             this.allAuthors();
           }
         )
@@ -81,7 +82,7 @@ export default {
        fetch(this.url+'/.netlify/functions/authorTasks')
          .then((response) => response.json())
          .then((result) => {
-           this.message = 'authorTasks processed ' + result.processed + ' message(s).';
+           this.message = 'authorTasks procesó ' + result.processed + ' actualización(es).';
            this.allAuthors();
          })
      }
