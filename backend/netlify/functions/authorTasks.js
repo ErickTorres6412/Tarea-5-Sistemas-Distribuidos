@@ -15,15 +15,11 @@ exports.handler = async (event, context) => {
   const url = (process.env.URL || 'https://' + event.headers.host) + '/.netlify/functions/';
 
   try {
-    // La lista bookstore es compartida por libros, autores y editoriales:
-    // se recorre completa y solo se toman las actualizaciones de esta entidad.
     const items = await redis.lrange(list, 0, -1);
     let processed = 0;
     for (const item of items) {
       const request = JSON.parse(item);
       if (request.entity != entity) continue;
-      // LREM saca la actualización de la lista; si devuelve 0 es porque
-      // otra invocación ya la tomó y no se debe procesar dos veces.
       if (await redis.lrem(list, 1, item) == 0) continue;
       let response;
       switch (request.method) {
