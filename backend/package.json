@@ -1,0 +1,14 @@
+{
+  "name": "bookstore-redis-backend",
+  "version": "1.0.0",
+  "description": "Tarea 5 - backend Bookstore con actualizaciones diferidas en una lista de Redis Cloud (Netlify Functions + Neon + Redis)",
+  "scripts": {
+    "dev": "netlify dev --port 8888",
+    "seed": "node --env-file=.env seed.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "@netlify/database": "^2.0.1",
+    "ioredis": "^5.4.1"
+  }
+}
